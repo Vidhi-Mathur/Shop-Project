@@ -68,8 +68,8 @@ app.use(session({
 }))
 const csrfProtection = csrf({ cookie: true });
 
-const privateKey = fs.readFileSync('server.key')
-const certificate = fs.readFileSync('server.cert')
+// const privateKey = fs.readFileSync('server.key')
+// const certificate = fs.readFileSync('server.cert')
 
 app.use(flash())
 
@@ -133,7 +133,8 @@ mongoose.connect(process.env.MONGODB_URI, {
 })
     .then(result => {
     //First argument configures the server and points it at private key and certificate and second being our request handler, which is our app here
-        https.createServer({key: privateKey, cert: certificate}, app).listen(3000);
+        // https.createServer({key: privateKey, cert: certificate}, app).listen(3000);
+        app.listen(3000);
     })
     .catch(err => {
         console.log(err);
