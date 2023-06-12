@@ -1,0 +1,46 @@
+<%- include('../includes/head.ejs') %>
+    <link rel="stylesheet" href="/css/product.css">
+    </head>
+    <body>
+<%- include('../includes/navigation.ejs') %>
+    <main>
+      <h1>My product</h1>
+      <p>List of all products</p>
+        <% if (result.length > 0) { %>
+       <div class="grid">
+            <% for (let product of result) { %>
+                <article class="card product-item">
+                    <header class="card__header">
+                        <h1 class="product__title"><%= product.title %></h1>
+                    </header>
+                    <div class="card__image">
+                        <!-- added / to beginning to turn it into an absolute path, so it isn't appended to current path but creates a new path with oly our domain that is rendered here -->
+                        <img src="/<%= product.imageUrl %>" alt="<%= product.title %>">
+                    </div>
+                    <div class="card__content">
+                        <h2 class="product__price">INR
+                            <%= product.price %>
+                        </h2>
+                        <p class="product__description">
+                            <%= product.description %>
+                        </p>
+                    </div>
+                    <div class="card__actions">
+<!-- To redirect to edit form edit through a route, we need to include the product ID and mark edit as true, otherwise would redirect to '/' as specified in /controllers/admin.js-->
+<!-- Remove form as required for sending a request through the browser with xwww url form encoded data.
+But will now gather that data manually. listen to a click to that button and implement function that will gather the product ID and the csrf token through the help of client side javascript. 
+'this' refers to the element in which we clicked-->
+    <a href="/admin/edit-product/<%= product._id %>?edit=true" class="btn">Edit</a>
+    <input type="hidden" name="productID" value="<%= product._id %>">
+    <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+    <button class="btn" onclick="deleteProduct(this)" type="button">Delete</button>
+                    </div>
+                </article>
+            <% } %>
+        </div>
+        <% } else { %>
+            <h1> No products Added </h1>
+        <% } %>
+    </main>
+<%- include('../includes/end.ejs') %>
+<script src="/js/admin.js"></script>
