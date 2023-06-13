@@ -15,7 +15,7 @@ const User = require('./models/user');
 const cookieParser = require("cookie-parser");
 const flash = require('connect-flash')
 const multer = require('multer')
-const helmet = require('helmet')
+// const helmet = require('helmet')
 const compression = require('compression')
 const morgan = require('morgan')
 const https = require('https')
@@ -91,17 +91,17 @@ app.use((req, res, next) => {
       });
   });
 
-app.use(
-    helmet.contentSecurityPolicy({
-      directives: {
-            'default-src': ["'self'"],
-            'script-src': ["'self'", "'unsafe-inline'", 'js.stripe.com'],
-            'style-src': ["'self'", "'unsafe-inline'", 'fonts.googleapis.com'],
-            'frame-src': ["'self'", 'js.stripe.com'],
-            'font-src': ["'self'", 'fonts.googleapis.com', 'fonts.gstatic.com']
-      },
-    })
-)
+// app.use(
+//     helmet.contentSecurityPolicy({
+//       directives: {
+//             'default-src': ["'self'"],
+//             'script-src': ["'self'", "'unsafe-inline'", 'js.stripe.com'],
+//             'style-src': ["'self'", "'unsafe-inline'", 'fonts.googleapis.com'],
+//             'frame-src': ["'self'", 'js.stripe.com'],
+//             'font-src': ["'self'", 'fonts.googleapis.com', 'fonts.gstatic.com']
+//       },
+//     })
+// )
 //Helpful when have a lot of css/js code as lot of files are saved. Images are not compressed as takes longer to load
 app.use(compression())
 
