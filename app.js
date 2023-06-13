@@ -130,6 +130,8 @@ app.use((error, req, res, next) => {
 
 
 mongoose.connect(process.env.MONGODB_URI, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
 })
     .then(result => {
     //First argument configures the server and points it at private key and certificate and second being our request handler, which is our app here
