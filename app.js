@@ -19,8 +19,9 @@ const multer = require('multer')
 const compression = require('compression')
 const morgan = require('morgan')
 const https = require('https')
-require('dotenv').config();
+require('dotenv').config().parsed;
 
+const MONGODB_URI = `mongodb+srv://${process.env.MONGODB_USER}:${process.env.MONGODB_PASSWORD}@cluster0.mjodwc6.mongodb.net/${process.env.MONGO_DB}`
 //Configures for local storage system, specified 2 functions now handles files for every incoming request
 const fileStorage = multer.diskStorage({
   destination: (req, file, cb) => {
@@ -45,7 +46,7 @@ const fileFilter = (req, file, cb) => {
 };
 
 const mongoStore = new MongoDBStore({
-    uri: process.env.MONGODB_URI,
+    uri: MONGODB_URI,
     collection: 'sessions'
 });
 
@@ -129,7 +130,7 @@ app.use((error, req, res, next) => {
 });
 
 
-mongoose.connect(process.env.MONGODB_URI, {
+mongoose.connect(MONGODB_URI, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 })
