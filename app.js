@@ -31,7 +31,7 @@ const fileStorage = multer.diskStorage({
   filename: (req, file, cb) => {
   /*To ensure not to overwrite 2 files with same name, we combine the unique hash value of file with 'filename' and original file name*/
   //Can also use snapshot of time to ensure uniqueness
-  cb(null, Date.now() + '-' + file.originalname)
+  cb(null, new Date().getTime() + '-' + file.originalname);
 }
 })
 
